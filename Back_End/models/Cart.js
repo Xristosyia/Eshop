@@ -1,48 +1,20 @@
 const mongoose = require('mongoose');
 
-const cartSchema = new mongoose.Schema(
-  {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-    items: [
-      {
-        product: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Product',
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-          min: 1,
-        },
-        price: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
-    totalPrice: {
-      type: Number,
-      default: 0,
-    },
-    expiresAt: {
-      type: Date,
-      required: true,
-      default: Date.now,
-    },
-  },
-  { timestamps: true }
-);
+const cartSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  items: [
+    {
+      productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
+      quantity: { type: Number, required: true, default: 1 },
+      price: { type: Number, required: true } // Store price at the time of adding to cart
+    }
+  ],
+  totalPrice: { type: Number, required: true, default: 0 } // Total price of all items in cart
+});
 
-// Middleware to calculate the total price and set expiration date
+// Function to update total price before saving
 cartSchema.pre('save', function (next) {
-  this.totalPrice = this.items.reduce((total, item) => total + item.price * item.quantity, 0);
-  // Set cart expiration to 24 hours from creation/update
-  this.expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);  // 24 hours
+  this.totalPrice = this.items.reduce((acc, item) => acc + item.quantity * item.price, 0);
   next();
 });
 
