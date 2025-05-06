@@ -2,6 +2,7 @@ require('dotenv').config(); // Load environment variables from .env
 const express = require('express');
 const connectDB = require('./config/db');
 const cors = require('cors');
+
 // Import routes
 const productRoutes = require('./routes/productRoutes');  //commnent until fixed
 const userRoutes = require('./routes/userRoutes');
