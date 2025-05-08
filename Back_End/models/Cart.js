@@ -6,10 +6,11 @@ const cartSchema = new mongoose.Schema({
     {
       productId: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
       quantity: { type: Number, required: true, default: 1 },
-      price: { type: Number, required: true } // Store price at the time of adding to cart
+      price: { type: Number, required: true }
     }
   ],
-  totalPrice: { type: Number, required: true, default: 0 } // Total price of all items in cart
+  totalPrice: { type: Number, required: true, default: 0 },
+  expiresAt: { type: Date } 
 });
 
 // Function to update total price before saving

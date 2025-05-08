@@ -14,13 +14,12 @@ router.post('/checkout', protect, checkoutValidation, async (req, res) => {
   }
   
   try {
-    const cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
+    const cart = await Cart.findOne({ userId: req.user._id }).populate('items.productId');
     if (!cart) return res.status(404).json({ message: 'Cart not found' });
 
     // Check if the cart has expired
-    if (new Date() > cart.expiresAt) {
-      // If the cart expired, delete and inform the user
-      await Cart.deleteOne({ user: req.user._id });
+    if (cart.expiresAt && new Date() > cart.expiresAt) {
+      await Cart.deleteOne({ userId: req.user._id });
       return res.status(400).json({ message: 'Cart has expired' });
     }
 

@@ -1,5 +1,5 @@
 const express = require('express');
-const { userRegistrationValidator } = require('../validators/userValidators');
+const { userRegistrationValidator, userLoginValidator } = require('../validators/userValidators');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
@@ -34,7 +34,7 @@ router.post(
 
 // **Login User**
 router.post(
-  '/login', userRegistrationValidator,
+  '/login', userLoginValidator,
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
@@ -52,7 +52,15 @@ router.post(
         expiresIn: '1h',
       });
 
-      res.status(200).json({ token });
+      res.status(200).json({  
+          token,
+          user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        } 
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
