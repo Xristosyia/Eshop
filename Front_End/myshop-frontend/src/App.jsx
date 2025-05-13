@@ -11,22 +11,22 @@ import EditProduct from './pages/EditProduct';
 
 function App() {
   return (
-    <Router>
-      <Navbar /> {}
+    <>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} /> {}
-        <Route path="/cart" element={<Cart />} /> {}
+        <Route path="/" element={<Home />} /> 
+        <Route path="/cart" element={<Cart />} /> 
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         
 
         {/* Admin Routes */}
-        <Route path="/admin" element={<AdminDashboard />} /> {}
-        <Route path="/admin/products" element={<ManageProducts />} /> {}
-        <Route path="/admin/products/add" element={<AddProduct />} /> {}
-        <Route path="/admin/products/edit/:id" element={<EditProduct />} /> {}
+        <Route path="/admin" element={<AdminDashboard />} /> 
+        <Route path="/admin/products" element={<ManageProducts />} /> 
+        <Route path="/admin/products/add" element={<AddProduct />} /> 
+        <Route path="/admin/products/edit/:id" element={<EditProduct />} /> 
       </Routes>
-    </Router>
+    </>
   );
 }
 
