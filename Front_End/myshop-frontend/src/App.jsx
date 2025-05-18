@@ -5,27 +5,28 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Cart from './pages/Cart';
 import AdminDashBoard from './pages/AdminDashboard';
-import ManageProduct from './pages/ManageProduct';
+import ManageProducts from './pages/ManageProducts';
 import AddProduct from './pages/AddProduct'; 
 import EditProduct from './pages/EditProduct';
 import DeleteProduct from './pages/DeleteProduct'
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   return (
-    <Router>
+    <>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/admin" element={<AdminDashBoard />} />
-        <Route path="/ManageProduct" element={<ManageProduct />} />
-        <Route path="/AddProduct" element={<AddProduct />} />
-        <Route path="/EditProduct/:id" element={<EditProduct />} />
-        <Route path="/DeleteProduct/:id" element={<DeleteProduct />} />
+        <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
+        <Route path="/admin" element={<PrivateRoute role="admin"><AdminDashBoard /></PrivateRoute>} />
+        <Route path="/ManageProducts" element={<PrivateRoute role="admin"><ManageProducts /></PrivateRoute>} />
+        <Route path="/AddProduct" element={<PrivateRoute role="admin"><AddProduct /></PrivateRoute>} />
+        <Route path="/EditProduct/:id" element={<PrivateRoute role="admin"><EditProduct /></PrivateRoute>} />
+        <Route path="/DeleteProduct/:id" element={<PrivateRoute role="admin"><DeleteProduct /></PrivateRoute>} />
       </Routes>
-    </Router>
+    </>
   );
 }
 
