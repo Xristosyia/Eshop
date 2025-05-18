@@ -5,7 +5,7 @@ export default function AdminDashBoard() {
     <div style={{ padding:'2rem' }}>
       <h1>Admin Dashboard</h1>
       <ul>
-        <li><Link to="/Manageproduct">Manage Products</Link></li>
+        <li><Link to="/ManageProduct">Manage Products</Link></li>
         <li><Link to="/admin/orders">Manage Orders</Link></li>
       </ul>
     </div>

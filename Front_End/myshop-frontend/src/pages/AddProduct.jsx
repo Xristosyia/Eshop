@@ -11,7 +11,7 @@ export default function AddProduct() {
   const submit = e => {
     e.preventDefault();
     axios.post('/admin/products/add', form)
-      .then(()=>navigate('/Manageproduct'))
+      .then(()=>navigate('/ManageProduct'))
       .catch(console.error);
   };
 

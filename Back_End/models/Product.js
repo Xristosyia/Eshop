@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema(
       required: [true, 'Stock count is required'],
       default: 0,
     },
-    imageUrl: {
+    image: {
       type: String,
       default: '',
     },

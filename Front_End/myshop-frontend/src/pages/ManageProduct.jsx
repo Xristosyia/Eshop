@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
 
-export default function Manageproduct() {
+export default function ManageProduct() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export default function Manageproduct() {
   return (
     <div style={{ padding:'2rem' }}>
       <h1>Manage Products</h1>
-      <button onClick={()=>navigate('/AddProducy')}>Add Product</button>
+      <button onClick={()=>navigate('/AddProduct')}>Add Product</button>
       <ul>
         {products.map(p=>(
           <li key={p._id}>

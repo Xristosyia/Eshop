@@ -9,6 +9,7 @@ const router = express.Router();
 router.post('/add', protectAdmin, productValidation, async (req, res) => {
 
     const errors = validationResult(req);
+    console.log('Received form data:', req.body);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
@@ -54,13 +55,13 @@ router.put('/update/:id', protectAdmin, async (req, res) => {
 // Delete a product
 router.delete('/delete/:id', protectAdmin, async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findByIdAndDelete(req.params.id);
     if (!product) return res.status(404).json({ message: 'Product not found' });
 
-    await product.remove();
+    
     res.status(200).json({ message: 'Product deleted' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: `error during deletion : ${error}` });
   }
 });
 

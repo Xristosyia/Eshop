@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
 export default function NavBar() {
-  const { token, logout } = useContext(AuthContext);
+  const { token,user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
  
 
@@ -24,7 +24,9 @@ export default function NavBar() {
         </>
       ) : (
         <>
-          <Link to="/admin" style={{ marginRight: '1rem' }}>Admin</Link>
+          {user?.role === 'admin' && (
+            <Link to="/admin" style={{ marginRight: '1rem' }}>Admin</Link>
+          )}
           <button onClick={handleLogout}>Logout</button>
         </>
       )}

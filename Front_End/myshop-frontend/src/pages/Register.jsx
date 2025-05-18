@@ -13,7 +13,7 @@ export default function Register() {
       await register(form);
       navigate('/login');
     } catch (error) {
-      setErr(error.response?.data?.message || 'Registration failed');
+      setErr(error.response?.data?.message || 'Either email exists or password is too short(8)');
     }
   };
 

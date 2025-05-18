@@ -18,12 +18,12 @@ export default function DeleteProduct() {
     axios.delete(`/admin/products/delete/${id}`)
       .then(() => {
         alert('Product deleted');
-        navigate('/Manageproduct');
+        navigate('/ManageProduct');
       })
       .catch(err => setError('Deletion failed'));
   };
 
-  const cancel = () => navigate('/Manageproduct');
+  const cancel = () => navigate('/ManageProduct');
 
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
 

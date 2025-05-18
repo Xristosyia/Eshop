@@ -11,14 +11,17 @@ export default function EditProduct() {
 
   useEffect(() => {
     axios.get(`/products/${id}`)
-      .then(res => setForm(res.data))
+    .then(res => {
+      const { name = '', price = '', description = '', image = '', category = '' } = res.data;
+      setForm({ name, price, description, image, category });
+    })
       .catch(console.error);
   }, [id]);
 
   const submit = e => {
     e.preventDefault();
     axios.put(`/admin/products/update/${id}`, form)
-      .then(()=>navigate('/Manageproduct'))
+      .then(()=>navigate('/ManageProduct'))
       .catch(console.error);
   };
 
