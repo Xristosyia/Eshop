@@ -1,54 +1,36 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import authService from '../services/authService';
+import { login } from '../services/authService';
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [err, setErr] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    setError('');
-
     try {
-      await authService.login(email, password);
-      navigate('/'); // Go to homepage after login
-    } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      await login({ email, password });
+      navigate('/');
+    } catch (error) {
+      setErr(error.response?.data?.message || 'Login failed');
     }
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div style={{ padding:'2rem' }}>
       <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div style={{ marginTop: '1rem' }}>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <div style={{ marginTop: '1rem' }}>
-          <button type="submit">Login</button>
-        </div>
+      {err && <p style={{ color:'red' }}>{err}</p>}
+      <form onSubmit={submit}>
+        <input type="email" placeholder="Email"
+               value={email} onChange={e=>setEmail(e.target.value)} required/>
+        <br/><br/>
+        <input type="password" placeholder="Password"
+               value={password} onChange={e=>setPassword(e.target.value)} required/>
+        <br/><br/>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
 }
-
-export default Login;

@@ -1,59 +1,39 @@
 import { useEffect, useState } from 'react';
-import axios from '../utils/axios'; // 👈 use our customized axios
+import axios from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
 
-function Home() {
+export default function Home() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    fetchProducts();
+    axios.get('/products')
+      .then(res => setProducts(res.data))
+      .catch(console.error);
   }, []);
 
-  const fetchProducts = async () => {
-    try {
-      const res = await axios.get('/products');
-      setProducts(res.data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-    }
-  };
-
-  const handleAddToCart = async (productId) => {
-    try {
-      await axios.post('/cart/add', { productId, quantity: 1 });
-      alert('Product added to cart!');
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        // Not authenticated
-        alert('Please login first!');
-        navigate('/login');
-      } else {
-        console.error('Error adding to cart:', error);
-      }
-    }
+  const addToCart = (id) => {
+    axios.post('/cart/add', { productId: id, quantity: 1 })
+      .then(() => alert('Added to cart'))
+      .catch(err => {
+        if (err.response?.status === 401) navigate('/login');
+        else console.error(err);
+      });
   };
 
   return (
     <div style={{ padding: '2rem' }}>
       <h1>Products</h1>
-      {products.length === 0 ? (
-        <p>No products available.</p>
-      ) : (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
-          {products.map((product) => (
-            <div key={product._id} style={{ border: '1px solid #ccc', padding: '1rem', width: '200px' }}>
-              <img src={product.image} alt={product.name} style={{ width: '100%', height: '150px', objectFit: 'cover' }} />
-              <h3>{product.name}</h3>
-              <p>${product.price}</p>
-              <p>{product.category}</p>
-              <button onClick={() => handleAddToCart(product._id)}>Add to Cart</button>
-            </div>
-          ))}
-        </div>
-      )}
+      <div style={{ display:'flex', flexWrap:'wrap', gap:'1rem' }}>
+        {products.map(p => (
+          <div key={p._id} style={{ border:'1px solid #ddd', padding:'1rem', width:'200px' }}>
+            <img src={p.image} alt={p.name} style={{ width:'100%', height:'120px', objectFit:'cover' }} />
+            <h3>{p.name}</h3>
+            <p>${p.price.toFixed(2)}</p>
+            <button onClick={() => addToCart(p._id)}>Add to Cart</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
-export default Home;

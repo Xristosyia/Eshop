@@ -2,66 +2,55 @@ import { useEffect, useState } from 'react';
 import axios from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
 
-function Cart() {
-  const [cart, setCart] = useState({ items: [] });
+export default function Cart() {
+  const [cart, setCart] = useState({ items: [], totalPrice: 0 });
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+    axios.get('/cart')
+      .then(res => setCart(res.data))
+      .catch(err => {
+        if (err.response?.status===401) navigate('/login');
+      });
+  }, [navigate]);
 
-  const fetchCart = async () => {
-    try {
-      const res = await axios.get('/cart');
-      setCart(res.data);
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        alert('Please login to view your cart');
-        navigate('/login');
-      } else {
-        console.error('Error fetching cart:', error);
-      }
-    }
+  const remove = (id) => {
+    axios.delete('/cart/remove', { data:{ productId:id } })
+      .then(() => setCart(c=>({
+        items: c.items.filter(i=>i.productId._id!==id),
+        totalPrice: c.items.filter(i=>i.productId._id!==id)
+                     .reduce((sum,i)=>sum+i.price*i.quantity,0)
+      })))
+      .catch(console.error);
   };
 
-  const handleRemoveItem = async (productId) => {
-    try {
-      await axios.delete('/cart/remove', { data: { productId } });
-      fetchCart(); // Refresh cart
-    } catch (error) {
-      console.error('Error removing item:', error);
-    }
-  };
-
-  const handleCheckout = async () => {
-    try {
-      await axios.post('/checkout', { address: "Dummy Address" }); // address optional if your backend doesn't need it
-      alert('Order placed successfully!');
-      navigate('/'); // back to Home
-    } catch (error) {
-      console.error('Checkout error:', error);
-    }
+  const checkout = () => {
+    axios.post('/orders/checkout')
+      .then(() => {
+        alert('Order placed');
+        navigate('/');
+      })
+      .catch(console.error);
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div style={{ padding:'2rem' }}>
       <h1>Your Cart</h1>
-      {cart.items.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <div>
-          {cart.items.map((item) => (
-            <div key={item.productId._id} style={{ marginBottom: '1rem' }}>
-              <strong>{item.productId.name}</strong> - {item.quantity} x ${item.price}
-              <button style={{ marginLeft: '1rem' }} onClick={() => handleRemoveItem(item.productId._id)}>Remove</button>
-            </div>
-          ))}
-          <h2>Total: ${cart.totalPrice}</h2>
-          <button onClick={handleCheckout}>Checkout</button>
-        </div>
-      )}
+      {cart.items.length===0
+        ? <p>Cart is empty</p>
+        : <div>
+            {cart.items.map(i=>(
+              <div key={i.productId._id} style={{ marginBottom:'1rem' }}>
+                <strong>{i.productId.name}</strong> x{i.quantity} = ${i.price*i.quantity}
+                <button onClick={()=>remove(i.productId._id)} style={{ marginLeft:'1rem' }}>
+                  Remove
+                </button>
+              </div>
+            ))}
+            <h2>Total: ${cart.totalPrice.toFixed(2)}</h2>
+            <button onClick={checkout}>Checkout</button>
+          </div>
+      }
     </div>
   );
 }
-
-export default Cart;

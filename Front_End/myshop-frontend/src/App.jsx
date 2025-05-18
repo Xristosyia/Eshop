@@ -1,32 +1,31 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Navbar from './components/Navbar'; // 
-import Home from './pages/Home';
 import Cart from './pages/Cart';
-import AdminDashboard from './pages/AdminDashboard';
-import ManageProducts from './pages/ManageProducts';
-import AddProduct from './pages/AddProduct';
+import AdminDashBoard from './pages/AdminDashboard';
+import ManageProduct from './pages/ManageProduct';
+import AddProduct from './pages/AddProduct'; 
 import EditProduct from './pages/EditProduct';
+import DeleteProduct from './pages/DeleteProduct'
 
 function App() {
   return (
-    <>
-      <Navbar />
+    <Router>
+      <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} /> 
-        <Route path="/cart" element={<Cart />} /> 
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        
-
-        {/* Admin Routes */}
-        <Route path="/admin" element={<AdminDashboard />} /> 
-        <Route path="/admin/products" element={<ManageProducts />} /> 
-        <Route path="/admin/products/add" element={<AddProduct />} /> 
-        <Route path="/admin/products/edit/:id" element={<EditProduct />} /> 
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/admin" element={<AdminDashBoard />} />
+        <Route path="/ManageProduct" element={<ManageProduct />} />
+        <Route path="/AddProduct" element={<AddProduct />} />
+        <Route path="/EditProduct/:id" element={<EditProduct />} />
+        <Route path="/DeleteProduct/:id" element={<DeleteProduct />} />
       </Routes>
-    </>
+    </Router>
   );
 }
 

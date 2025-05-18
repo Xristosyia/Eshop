@@ -1,64 +1,38 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import authService from '../services/authService';
+import { register } from '../services/authService';
 
-function Register() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+export default function Register() {
+  const [form, setForm] = useState({ name:'', email:'', password:'' });
+  const [err, setErr] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const submit = async e => {
     e.preventDefault();
-    setError('');
-
     try {
-      await authService.register(name, email, password);
-      navigate('/login'); // After registration, go to login page
-    } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      await register(form);
+      navigate('/login');
+    } catch (error) {
+      setErr(error.response?.data?.message || 'Registration failed');
     }
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div style={{ padding:'2rem' }}>
       <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div style={{ marginTop: '1rem' }}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div style={{ marginTop: '1rem' }}>
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <div style={{ marginTop: '1rem' }}>
-          <button type="submit">Register</button>
-        </div>
+      {err && <p style={{ color:'red' }}>{err}</p>}
+      <form onSubmit={submit}>
+        <input type="text" placeholder="Name" name="name"
+               value={form.name} onChange={e=>setForm({...form, name:e.target.value})} required/>
+        <br/><br/>
+        <input type="email" placeholder="Email" name="email"
+               value={form.email} onChange={e=>setForm({...form, email:e.target.value})} required/>
+        <br/><br/>
+        <input type="password" placeholder="Password" name="password"
+               value={form.password} onChange={e=>setForm({...form, password:e.target.value})} required/>
+        <br/><br/>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
 }
-
-export default Register;
