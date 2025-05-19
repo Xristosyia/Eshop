@@ -25,7 +25,11 @@ export default function Cart() {
   };
 
   const checkout = () => {
-    axios.post('/orders/checkout')
+    axios.post('/orders/checkout', {
+      shippingAddress: '123 Demo St, City',
+      paymentMethod: 'credit',
+      totalPrice: cart.totalPrice
+    })
       .then(() => {
         alert('Order placed');
         navigate('/');
