@@ -14,8 +14,7 @@ router.post('/checkout', protect, checkoutValidation, async (req, res) => {
   }
   
   try {
-    console.log('REQ.USER:', req.user);
-    console.log('BODY:', req.body);
+
 
     const cart = await Cart.findOne({ userId: req.user.id }).populate('items.productId');
     if (!cart) return res.status(404).json({ message: 'Cart not found' });
@@ -34,15 +33,13 @@ router.post('/checkout', protect, checkoutValidation, async (req, res) => {
         quantity: item.quantity,
         price: item.price
       })),
-      totalPrice: cart.totalPrice,
-      shippingAddress: req.body.shippingAddress,  // ⬅ required by validator
-      paymentMethod: req.body.paymentMethod       // ⬅ required by validator
+      totalPrice: cart.totalPrice
     });
 
     await order.save();
 
     // Clear the cart after checkout
-    await Cart.deleteOne({ user: req.user.id });
+    await Cart.deleteOne({ user: req.user._id });
 
     res.status(200).json({ message: 'Order placed successfully', order });
   } catch (error) {

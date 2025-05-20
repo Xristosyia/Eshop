@@ -6,7 +6,7 @@ export default function AdminDashBoard() {
       <h1>Admin Dashboard</h1>
       <ul>
         <li><Link to="/ManageProduct">Manage Products</Link></li>
-        <li><Link to="/admin/orders">Manage Orders</Link></li>
+        <li><Link to="/ManageOrders">Manage Orders</Link></li>
       </ul>
     </div>
   );
