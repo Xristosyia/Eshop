@@ -24,6 +24,12 @@ export default function Cart() {
       .catch(console.error);
   };
 
+  const updateQuantity = (id, quantity) => {
+    axios.put('/cart/update', { productId: id, quantity })
+      .then(res => setCart(res.data))
+      .catch(console.error);
+  };
+
   const checkout = () => {
     axios.post('/orders/checkout', {
       totalPrice: cart.totalPrice
@@ -42,8 +48,14 @@ export default function Cart() {
         ? <p>Cart is empty</p>
         : <div>
             {cart.items.map(i=>(
-              <div key={i.productId._id} style={{ marginBottom:'1rem' }}>
+              <div key={`${i.productId._id}-${i.quantity}`} style={{ marginBottom:'1rem' }}>
                 <strong>{i.productId.name}</strong> x{i.quantity} = ${i.price*i.quantity}
+                <button onClick={() => updateQuantity(i.productId._id, i.quantity - 1)} style={{ marginLeft: '1rem' }}>
+                  −
+                </button>
+                <button onClick={() => updateQuantity(i.productId._id, i.quantity + 1)} style={{ marginLeft: '0.5rem' }}>
+                  +
+                </button>
                 <button onClick={()=>remove(i.productId._id)} style={{ marginLeft:'1rem' }}>
                   Remove
                 </button>

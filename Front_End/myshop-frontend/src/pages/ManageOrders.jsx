@@ -10,6 +10,18 @@ export default function ManageOrders() {
       .catch(console.error);
   }, []);
 
+const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this order?')) return;
+
+    try {
+      await axios.delete(`/admin/orders/delete/${id}`);
+      setOrders(prev => prev.filter(order => order._id !== id));
+      alert('Order deleted successfully.');
+    } catch (err) {
+      console.error('Delete error:', err);
+    }
+  };
+
   return (
     <div style={{ padding: '2rem' }}>
       <h1>All Orders</h1>
@@ -33,6 +45,20 @@ export default function ManageOrders() {
                 </li>
               ))}
             </ul>
+            <button
+              onClick={() => handleDelete(order._id)}
+              style={{
+                marginTop: '0.5rem',
+                background: 'red',
+                color: 'white',
+                border: 'none',
+                padding: '0.5rem 1rem',
+                cursor: 'pointer',
+                borderRadius: '4px'
+              }}
+            >
+              Delete Order
+            </button>
           </div>
         ))
       )}

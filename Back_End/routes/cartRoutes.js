@@ -90,6 +90,7 @@ router.put('/update', protect, async (req, res) => {
       }
 
       await cart.save();
+      const updatedCart = await cart.populate('items.productId');
       res.json(cart);
     } else {
       res.status(404).json({ message: 'Product not found in cart' });

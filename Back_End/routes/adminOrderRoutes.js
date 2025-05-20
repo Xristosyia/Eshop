@@ -29,4 +29,17 @@ router.put('/update/:id', protectAdmin, async (req, res) => {
   }
 });
 
+router.delete('/delete/:id', protectAdmin, async (req, res) => {
+  try {
+    const deleted = await Order.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    res.status(200).json({ message: 'Order deleted successfully' });
+  } catch (error) {
+    console.error('Delete Order Error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
