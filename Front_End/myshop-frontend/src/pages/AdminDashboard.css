@@ -1,0 +1,7 @@
+.admin-dashboard ul {
+  list-style: none;
+  padding: 0;
+}
+.admin-dashboard li {
+  margin-bottom: 0.5rem;
+}

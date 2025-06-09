@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
+import './Home.css';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -22,18 +23,19 @@ export default function Home() {
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>Products</h1>
-      <div style={{ display:'flex', flexWrap:'wrap', gap:'1rem' }}>
-        {products.map(p => (
-          <div key={p._id} style={{ border:'1px solid #ddd', padding:'1rem', width:'200px' }}>
-            <img src={p.image} alt={p.name} style={{ width:'100%', height:'120px', objectFit:'cover' }} />
-            <h3>{p.name}</h3>
-            <p>${p.price.toFixed(2)}</p>
-            <button onClick={() => addToCart(p._id)}>Add to Cart</button>
-          </div>
-        ))}
+    <div className="home-container">
+  <h1>Products</h1>
+  <div className="product-grid">
+    {products.map(p => (
+      <div key={p._id} className="product-card">
+        <img src={p.image} alt={p.name} className="product-image" />
+        <h3>{p.name}</h3>
+        <p>${p.price.toFixed(2)}</p>
+        <button onClick={() => addToCart(p._id)}>Add to Cart</button>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
+
   );
 }

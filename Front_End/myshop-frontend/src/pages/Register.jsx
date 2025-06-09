@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from '../services/authService';
+import './LogRegi.css'
 
 export default function Register() {
   const [form, setForm] = useState({ name:'', email:'', password:'' });
@@ -18,9 +19,9 @@ export default function Register() {
   };
 
   return (
-    <div style={{ padding:'2rem' }}>
+    <div className="form-container">
       <h1>Register</h1>
-      {err && <p style={{ color:'red' }}>{err}</p>}
+      {err && <p className="form-error">{err}</p>}
       <form onSubmit={submit}>
         <input type="text" placeholder="Name" name="name"
                value={form.name} onChange={e=>setForm({...form, name:e.target.value})} required/>

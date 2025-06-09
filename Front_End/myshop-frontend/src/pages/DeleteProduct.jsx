@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from '../utils/axios';
+import './AddEditDelete.css';
 
 export default function DeleteProduct() {
   const { id } = useParams();
@@ -30,15 +31,15 @@ export default function DeleteProduct() {
   if (!product) return <p>Loading product...</p>;
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="form-wrapper">
       <h1>Delete Product</h1>
       <p>Are you sure you want to delete the following product?</p>
       <h2>{product.name}</h2>
-      <img src={product.image} alt={product.name} style={{ width: '200px', height: '150px' }} />
+      <img className="delete-image" src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p><strong>Price:</strong> ${product.price.toFixed(2)}</p>
       <br />
-      <button onClick={handleDelete} style={{ marginRight: '1rem', backgroundColor: 'red', color: 'white' }}>
+      <button className="danger-button" onClick={handleDelete}>
         Confirm Delete
       </button>
       <button onClick={cancel}>Cancel</button>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
+import './ManageProduct.css'
 
 export default function ManageProduct() {
   const [products, setProducts] = useState([]);
@@ -20,17 +21,17 @@ export default function ManageProduct() {
   };
 
   return (
-    <div style={{ padding:'2rem' }}>
+    <div className="manage-product">
       <h1>Manage Products</h1>
       <button onClick={()=>navigate('/AddProduct')}>Add Product</button>
       <ul>
         {products.map(p=>(
           <li key={p._id}>
             {p.name} - ${p.price}
-            <button onClick={()=>navigate(`/EditProduct/${p._id}`)} style={{ marginLeft:'1rem' }}>
+            <button onClick={()=>navigate(`/EditProduct/${p._id}`)} >
               Edit
             </button>
-            <button onClick={()=>del(p._id)} style={{ marginLeft:'0.5rem' }}>
+            <button onClick={()=>del(p._id)}>
               Delete
             </button>
           </li>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../utils/axios';
+import './ManageOrders.css'
+
 
 export default function ManageOrders() {
   const [orders, setOrders] = useState([]);
@@ -23,16 +25,13 @@ const handleDelete = async (id) => {
   };
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className="manage-orders">
       <h1>All Orders</h1>
       {orders.length === 0 ? (
         <p>No orders found.</p>
       ) : (
         orders.map(order => (
-          <div
-            key={order._id}
-            style={{ border: '1px solid #ccc', padding: '1rem', marginBottom: '1rem' }}
-          >
+          <div key={order._id} className="order-card">
             <h3>Order ID: {order._id}</h3>
             <p><strong>User:</strong> {order.user?.name || 'N/A'} ({order.user?.email})</p>
             <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
@@ -45,18 +44,7 @@ const handleDelete = async (id) => {
                 </li>
               ))}
             </ul>
-            <button
-              onClick={() => handleDelete(order._id)}
-              style={{
-                marginTop: '0.5rem',
-                background: 'red',
-                color: 'white',
-                border: 'none',
-                padding: '0.5rem 1rem',
-                cursor: 'pointer',
-                borderRadius: '4px'
-              }}
-            >
+            <button onClick={() => handleDelete(order._id)}>
               Delete Order
             </button>
           </div>

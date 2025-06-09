@@ -1,0 +1,32 @@
+.form-wrapper {
+  background-color: var(--card-bg);
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  max-width: 500px;
+  margin: auto;
+}
+.form-wrapper input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.delete-image {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.danger-button {
+  margin-right: 1rem;
+  background-color: red;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.danger-button:hover {
+  background-color: darkred;
+}
