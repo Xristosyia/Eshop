@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
+import './AddEditDelete.css';
 
 export default function AddProduct() {
   const [form, setForm] = useState({
@@ -16,7 +17,7 @@ export default function AddProduct() {
   };
 
   return (
-    <div style={{ padding:'2rem' }}>
+    <div className="form-wrapper">
       <h1>Add Product</h1>
       <form onSubmit={submit}>
         {['name','price','description','image','category'].map(key=>(

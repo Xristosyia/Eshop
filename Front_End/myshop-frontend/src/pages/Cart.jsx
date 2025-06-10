@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
+import './Cart.css'
+
 
 export default function Cart() {
   const [cart, setCart] = useState({ items: [], totalPrice: 0 });
@@ -42,27 +44,27 @@ export default function Cart() {
   };
 
   return (
-    <div style={{ padding:'2rem' }}>
+    <div className="cart-wrapper">
       <h1>Your Cart</h1>
       {cart.items.length===0
         ? <p>Cart is empty</p>
         : <div>
             {cart.items.map(i=>(
-              <div key={`${i.productId._id}-${i.quantity}`} style={{ marginBottom:'1rem' }}>
+             <div key={`${i.productId._id}-${i.quantity}`} className="cart-item">
                 <strong>{i.productId.name}</strong> x{i.quantity} = ${i.price*i.quantity}
-                <button onClick={() => updateQuantity(i.productId._id, i.quantity - 1)} style={{ marginLeft: '1rem' }}>
+                <button  className="cart-button" onClick={() => updateQuantity(i.productId._id, i.quantity - 1)} >
                   −
                 </button>
-                <button onClick={() => updateQuantity(i.productId._id, i.quantity + 1)} style={{ marginLeft: '0.5rem' }}>
+                <button  className="cart-button" onClick={() => updateQuantity(i.productId._id, i.quantity + 1)}>
                   +
                 </button>
-                <button onClick={()=>remove(i.productId._id)} style={{ marginLeft:'1rem' }}>
+                <button  className="cart-button" onClick={()=>remove(i.productId._id)} >
                   Remove
                 </button>
               </div>
             ))}
             <h2>Total: ${cart.totalPrice.toFixed(2)}</h2>
-            <button onClick={checkout}>Checkout</button>
+            <button  className="cart-button" onClick={checkout}>Checkout</button>
           </div>
       }
     </div>

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { login } from '../services/authService';
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import './LogRegi.css'
+
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -23,9 +25,9 @@ export default function Login() {
   };
 
   return (
-    <div style={{ padding:'2rem' }}>
+    <div className="form-container">
       <h1>Login</h1>
-      {err && <p style={{ color:'red' }}>{err}</p>}
+      {err && <p className="form-error">{err}</p>}
       <form onSubmit={submit}>
         <input type="email" placeholder="Email"
                value={email} onChange={e=>setEmail(e.target.value)} required/>
