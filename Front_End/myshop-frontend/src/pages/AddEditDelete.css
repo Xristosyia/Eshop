@@ -21,7 +21,7 @@
   color: var(--cyan);
 }
 
-button {
+.form-wrapper button {
   margin-top: 0.5rem;
   background-color: var(--accent-bg);
   color: white;
@@ -31,7 +31,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.form-wrapper button:hover {
   background-color: var(--button-hover);
 }
 

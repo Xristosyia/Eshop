@@ -1,8 +1,11 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --bg-color: #f0faff;
+  --card-bg: #e0f7fa;
+  --border-color: #00acc1;
+  --accent-bg: #00bcd4;
+  --cyan: #0097a7;
+  --text-color: #00363a;
+  --button-hover: #007c91;
 }
 
 .logo {
