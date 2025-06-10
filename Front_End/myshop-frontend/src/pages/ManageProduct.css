@@ -33,13 +33,15 @@
 }
 
 .manage-product button {
-  margin-left: 0.5rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px;
+  margin-top: 0.5rem;
+  background-color: var(--accent-bg);
+  color: white;
   border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
   cursor: pointer;
 }
 
 .manage-product button:hover {
-  background-color: #ddd;
+  background-color: var(--button-hover);
 }

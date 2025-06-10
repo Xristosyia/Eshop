@@ -1,7 +1,24 @@
+.admin-dashboard {
+  padding: 2rem;
+  text-align: center;
+}
+
 .admin-dashboard ul {
   list-style: none;
   padding: 0;
 }
+
 .admin-dashboard li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
+
+.admin-dashboard a {
+  text-decoration: none;
+  color: var(--cyan);
+  font-weight: bold;
+}
+
+.admin-dashboard a:hover {
+  text-decoration: underline;
+}
+

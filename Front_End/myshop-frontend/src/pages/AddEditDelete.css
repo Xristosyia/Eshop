@@ -2,31 +2,51 @@
   background-color: var(--card-bg);
   padding: 2rem;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 12px;
   max-width: 500px;
-  margin: auto;
+  margin: 2rem auto;
+  box-shadow: 0 4px 10px rgba(0, 150, 136, 0.2);
 }
+
 .form-wrapper input {
   width: 100%;
-  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-top: 0.25rem;
 }
-.delete-image {
-  width: 200px;
-  height: 150px;
-  object-fit: cover;
-  margin-bottom: 1rem;
+
+.form-wrapper label {
+  font-weight: bold;
+  color: var(--cyan);
+}
+
+button {
+  margin-top: 0.5rem;
+  background-color: var(--accent-bg);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--button-hover);
 }
 
 .danger-button {
-  margin-right: 1rem;
-  background-color: red;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
+  background-color: #e53935;
 }
 
 .danger-button:hover {
-  background-color: darkred;
+  background-color: #b71c1c;
+}
+
+.delete-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }

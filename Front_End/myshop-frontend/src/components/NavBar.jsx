@@ -20,8 +20,8 @@ export default function NavBar() {
       <Link to="/cart" className="nav-link">Cart</Link>
       {!token ? (
         <>
-          <Link to="/login" style={{ marginRight: '1rem' }}>Login</Link>
-          <Link to="/register">Register</Link>
+          <Link to="/login" className="nav-link">Login</Link>
+          <Link to="/register" className="nav-link">Register</Link>
         </>
       ) : (
         <>

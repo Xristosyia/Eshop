@@ -1,0 +1,82 @@
+1.Introduction
+	Overview
+	Features
+	Tech Stack
+2.Project Structure
+	Frontend (React + Vite)
+	Backend (Node.js + Express)
+	Shared Resources
+3.Getting Started
+	Prerequisites (what i frotend and what is backend, js/node, html css?)
+	Installation
+	Running the App (Dev Mode)
+4.Frontend
+	Folder Structure
+	Routing
+	State Management 
+	API Communication
+	Components Overview
+	Styling 
+5.Backend
+	Folder Structure
+	API Endpoints
+	Middleware
+	Authentication / Authorization
+	Database Schema / Models
+	Configuration & Environment Variables
+6.Core Features
+	User Authentication (Register/Login)
+	Product Listing
+	Product Details
+	Shopping Cart
+	Checkout Process
+	Admin Panel (Product Management, Orders, etc.)
+7.Troubleshooting & FAQs
+	Common Issues
+	Debugging Tips
+	Acknowledgments
+	
+	
+	
+	
+	
+	mongoose :
+		Mongoose is a Node. js-based Object Data Modeling (ODM) library for MongoDB.
+		It is akin to an Object Relational Mapper (ORM) such as SQLAlchemy for traditional SQL databases.
+		The problem that Mongoose aims to solve is allowing developers to enforce a specific schema at the application layer.
+	jsonwebtoken:
+		A JSON Web Token (JWT) is a standard used to securely transmit information between a client (like a frontend application) and a server (the backend)
+		Because JWTs can be signed—for example, using public/private key pairs—you can be sure the senders are who they say they are(google)
+	dotenv: 
+		Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env (google)
+	bcrypt : 
+		bcrypt is a password-hashing function designed by Niels Provos and David Mazières. It is based on the Blowfish cipher and presented at USENIX in 1999.
+		Bcrypt is widely used for securely hashing passwords.(google)
+	express-validator:
+		Express-Validator is a combination of middleware provided by the Express JS module and the Validator.js module, which provides validators
+		and sanitizers for string data types.
+		Express-Validator provides the functionality to validate input data by using a validation chain.(google)
+	cors :
+		Cors is ahort for Cross-origin resource sharing. 
+		CORS is a mechanism for integrating applications.
+		CORS defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. (google)
+	express: 
+		Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. (expressjs.com)
+	///////
+	
+	react :
+		React is designed to create sophisticated user interfaces. 
+		It allows using HTML-like syntax within JavaScript code, enabling developers to create reusable components and 
+		write less code for UI implementation. React is widely used in web development due to the following feature: Code Reusability(google)
+	
+	
+	axios:
+	
+		Axios is a popular JavaScript library used for making HTTP requests from a 
+		web browser or Node. js.It simplifies the process of sending asynchronous HTTP
+		requests to a server, and also handles the response. It automatically transforms the response to JSON format 
+		"under the hood", allowing you to use the response data directly (google)
+		
+		
+		na tsekarw order valiation gia shipping address ktl
+		episis category se product validation

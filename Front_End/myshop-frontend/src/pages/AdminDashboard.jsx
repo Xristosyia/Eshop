@@ -3,7 +3,7 @@ import './AdminDashboard.css'
 
 export default function AdminDashBoard() {
   return (
-    <div style={{ padding:'2rem' }}>
+    <div className="admin-dashboard">
       <h1>Admin Dashboard</h1>
       <ul>
         <li><Link to="/ManageProduct">Manage Products</Link></li>

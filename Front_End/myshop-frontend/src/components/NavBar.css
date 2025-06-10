@@ -9,6 +9,15 @@ nav {
 nav a, nav button {
   color: var(--text-color);
   padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
 }
 nav a:hover, nav button:hover {
   background-color: var(--cyan);

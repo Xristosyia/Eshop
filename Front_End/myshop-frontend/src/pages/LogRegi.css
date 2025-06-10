@@ -2,30 +2,34 @@
   background-color: var(--card-bg);
   padding: 2rem;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
+  border-radius: 12px;
   max-width: 400px;
   margin: auto;
+  box-shadow: 0 4px 10px rgba(0, 188, 212, 0.2);
 }
+
 .form-container input {
   width: 100%;
-  margin-bottom: 1rem;
-}
-.form-error {
-  color: red;
-  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
 }
 
 .form-container button {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.6rem;
   background-color: var(--accent-bg);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
+  color: white;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
 .form-container button:hover {
-  background-color: var(--cyan);
-  color: var(--bg-color);
+  background-color: var(--button-hover);
+}
+
+.form-error {
+  color: red;
+  margin-bottom: 1rem;
 }
