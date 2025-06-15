@@ -1,6 +1,6 @@
 const { body } = require('express-validator');
 
-// Validation for user registration
+// Vald for regi
 const userRegistrationValidator = [
   body('name')
     .notEmpty().withMessage('Name is required')
@@ -13,7 +13,7 @@ const userRegistrationValidator = [
     .isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
 ];
 
-// Validation for user login
+// Vald for login
 const userLoginValidator = [
   body('email')
     .isEmail().withMessage('Please provide a valid email address')

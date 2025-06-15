@@ -7,7 +7,7 @@ const { protectAdmin } = require('../middleware/authMiddleware');
 
 
 
-// **READ all Products**
+
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find();
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 
-// **READ Single Product by ID**
+
 router.get('/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);

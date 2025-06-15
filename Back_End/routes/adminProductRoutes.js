@@ -5,7 +5,6 @@ const { protectAdmin } = require('../middleware/authMiddleware');
 const Product = require('../models/Product');
 const router = express.Router();
 
-// Add a new product
 router.post('/add', protectAdmin, productValidation, async (req, res) => {
 
     const errors = validationResult(req);
@@ -31,7 +30,6 @@ router.post('/add', protectAdmin, productValidation, async (req, res) => {
   }
 });
 
-// Update a product
 router.put('/update/:id', protectAdmin, async (req, res) => {
   const { name, price, description, image, category } = req.body;
 
@@ -52,7 +50,6 @@ router.put('/update/:id', protectAdmin, async (req, res) => {
   }
 });
 
-// Delete a product
 router.delete('/delete/:id', protectAdmin, async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);

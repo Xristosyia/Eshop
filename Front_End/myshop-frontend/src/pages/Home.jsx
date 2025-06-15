@@ -31,6 +31,7 @@ export default function Home() {
         <img src={p.image} alt={p.name} className="product-image" />
         <h3>{p.name}</h3>
         <p>${p.price.toFixed(2)}</p>
+        <p>Description:  {p.description}</p>
         <button onClick={() => addToCart(p._id)}>Add to Cart</button>
       </div>
     ))}

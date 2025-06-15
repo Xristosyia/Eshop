@@ -6,7 +6,6 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-// **Register User**
 router.post(
   '/register', userRegistrationValidator, async (req, res) => {
     const errors = validationResult(req);
@@ -32,7 +31,6 @@ router.post(
   }
 );
 
-// **Login User**
 router.post(
   '/login', userLoginValidator,
   async (req, res) => {

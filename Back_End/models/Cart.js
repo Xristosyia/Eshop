@@ -13,7 +13,7 @@ const cartSchema = new mongoose.Schema({
   expiresAt: { type: Date } 
 });
 
-// Function to update total price before saving
+// updt total peice prin to save
 cartSchema.pre('save', function (next) {
   this.totalPrice = this.items.reduce((acc, item) => acc + item.quantity * item.price, 0);
   next();

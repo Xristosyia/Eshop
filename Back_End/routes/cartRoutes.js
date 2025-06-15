@@ -1,24 +1,22 @@
 const express = require('express');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
-const { protect } = require('../middleware/authMiddleware'); // Ensure user authentication
+const { protect } = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-// **Get Cart Items** - Get the cart for the authenticated user
 router.get('/', protect, async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.user.id }).populate('items.productId');
-    if (!cart) return res.json({ items: [] }); // Return empty cart if not found
+    if (!cart) return res.json({ items: [] }); 
     res.json(cart);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// **Add to Cart** - Add item to the cart for the authenticated user
 router.post('/add', protect, async (req, res) => {
-  const { productId, quantity } = req.body;  // No need to pass userId, it's taken from JWT
+  const { productId, quantity } = req.body; 
 
   try {
     let cart = await Cart.findOne({ userId: req.user.id });
@@ -44,7 +42,6 @@ router.post('/add', protect, async (req, res) => {
   }
 });
 
-// **Remove from Cart** - Remove item from the cart for the authenticated user
 router.delete('/remove', protect, async (req, res) => {
   const { productId } = req.body;
 
@@ -62,7 +59,6 @@ router.delete('/remove', protect, async (req, res) => {
   }
 });
 
-// **Clear Cart** - Clear the entire cart for the authenticated user
 router.delete('/clear', protect, async (req, res) => {
   try {
     await Cart.findOneAndDelete({ userId: req.user.id });
@@ -72,7 +68,6 @@ router.delete('/clear', protect, async (req, res) => {
   }
 });
 
-// **Update Cart Item** - Update item quantity or remove if 0 for the authenticated user
 router.put('/update', protect, async (req, res) => {
   const { productId, quantity } = req.body;
 
@@ -84,7 +79,7 @@ router.put('/update', protect, async (req, res) => {
 
     if (itemIndex > -1) {
       if (quantity <= 0) {
-        cart.items.splice(itemIndex, 1); // Remove item if quantity is 0
+        cart.items.splice(itemIndex, 1);
       } else {
         cart.items[itemIndex].quantity = quantity;
       }

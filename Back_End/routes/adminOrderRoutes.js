@@ -3,7 +3,6 @@ const { protectAdmin } = require('../middleware/authMiddleware');
 const Order = require('../models/Order');
 const router = express.Router();
 
-// Get all orders
 router.get('/', protectAdmin, async (req, res) => {
   try {
     const orders = await Order.find().populate('user').populate('items.product');
@@ -13,7 +12,6 @@ router.get('/', protectAdmin, async (req, res) => {
   }
 });
 
-// Update order status
 router.put('/update/:id', protectAdmin, async (req, res) => {
   const { status } = req.body;
 

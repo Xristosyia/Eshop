@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-//make a mold for the products
 
 const productSchema = new mongoose.Schema(
   {

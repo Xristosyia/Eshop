@@ -1,6 +1,6 @@
 const { body } = require('express-validator');
 
-// Validation for product inputs
+// Vald for prod inpts
 const productValidation = [
   body('name').notEmpty().withMessage('Name is required').isLength({ max: 100 }).withMessage('Name should be less than 100 characters'),
   body('price').notEmpty().withMessage('Price is required').isFloat({ min: 0 }).withMessage('Price must be a positive number'),
